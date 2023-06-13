@@ -13,9 +13,9 @@ async function run() {
                 $near: {
                     $geometry: {
                         type: 'Point',
-                        coordinates: [-1.8353, -10.6215]
+                        coordinates: [-13.0014756,-38.5082636]
                     },
-                    $maxDistance: 5000
+                    $maxDistance: 1000
                 }
             }
         };

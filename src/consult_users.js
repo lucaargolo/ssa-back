@@ -8,7 +8,7 @@ async function run() {
         const db = client.db("ssa")
         const users = db.collection("users")
 
-        let email = "lorena.alexandre@ufba.br"
+        let email = "pedro.lopes@ufba.br"
         console.log("Search user by email: "+email)
         let user = await users.findOne({"email": email})
         console.log("User found by email: ")

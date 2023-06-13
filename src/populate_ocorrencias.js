@@ -1,7 +1,15 @@
-const { MongoClient } = require("mongodb")
+const { MongoClient, ObjectId } = require("mongodb")
 
 const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
+
+function getRandomDate(start, end) {
+    const startDate = start.getTime();
+    const endDate = end.getTime();
+
+    const randomTime = Math.random() * (endDate - startDate) + startDate;
+    return new Date(randomTime);
+}
 
 async function run() {
     try {
@@ -9,25 +17,28 @@ async function run() {
         const users = db.collection("users")
         const ocorrencias = db.collection("ocorrencias")
 
-        let email = "lorena.alexandre@ufba.br"
+        let email = "rodrigo.perim@ufba.br"
         let user = await users.findOne({"email": email})
         let userId = user["_id"]
 
-        for(let i = 0; i < 10; i++) {
+        let startDate = new Date('2022-01-01');
+        let endDate = new Date('2023-05-31');
+
+        for(let i = 0; i < 2000000; i++) {
             const coordinates = [
-                (Math.random() * 40 - 20),
-                (Math.random() * 40 - 20)
+                -13.0014756 + (((Math.random() * 10) - 5)/100.0),
+                -38.5082636 + (((Math.random() * 10) - 5)/100.0)
             ];
 
+            const randomDate = getRandomDate(startDate, endDate);
+
             const ocorrencia = {
-                usuario_id: {
-                    $oid: userId
-                },
+                usuario_id: new ObjectId(userId),
                 localizacao: {
                     type: 'Point',
                     coordinates,
                 },
-                data_hora: new Date().toISOString(),
+                data_hora: randomDate,
                 notificar_para: "Amigos",
                 lista_de_amigos: user.amigos_ids,
             };

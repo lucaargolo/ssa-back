@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb")
+const { MongoClient, ObjectId } = require("mongodb")
 
 const uri = "mongodb://127.0.0.1:27017"
 const client = new MongoClient(uri)
@@ -7,7 +7,7 @@ const leite = require("leite")
 let pessoa = leite().pessoa
 
 const fs = require('fs')
-let rawdata = fs.readFileSync('./resources/cursos.json')
+let rawdata = fs.readFileSync('../resources/cursos.json')
 let cursos = JSON.parse(rawdata)
 
 async function run() {
@@ -28,7 +28,7 @@ async function run() {
                 let amigo = inserted[Math.floor(Math.random()*inserted.length)]
                 if(amigos.indexOf(amigo) === -1) {
                     amigos.push(amigo)
-                    amigos_ids.push({"$oid": amigo})
+                    amigos_ids.push(new ObjectId(amigo))
                 }
             }
             let user = {
