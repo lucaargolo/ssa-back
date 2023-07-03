@@ -17,14 +17,15 @@ async function run() {
         const users = db.collection("users")
         const ocorrencias = db.collection("ocorrencias")
 
-        let email = "rodrigo.perim@ufba.br"
-        let user = await users.findOne({"email": email})
-        let userId = user["_id"]
-
         let startDate = new Date('2022-01-01');
         let endDate = new Date('2023-05-31');
 
         for(let i = 0; i < 2000000; i++) {
+            let user = await users.aggregate([
+                { "$sample": {"size": 1} }
+            ]).next()
+            let userId = user["_id"]
+
             const coordinates = [
                 -13.0014756 + (((Math.random() * 10) - 5)/100.0),
                 -38.5082636 + (((Math.random() * 10) - 5)/100.0)
