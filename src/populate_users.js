@@ -1,13 +1,15 @@
 const { MongoClient, ObjectId } = require("mongodb")
 
 const uri = "mongodb://127.0.0.1:27017"
-const client = new MongoClient(uri)
+const client = new MongoClient(uri, {
+    directConnection: true
+})
 
 const leite = require("leite")
 let pessoa = leite().pessoa
 
 const fs = require('fs')
-let rawdata = fs.readFileSync('../resources/cursos.json')
+let rawdata = fs.readFileSync('./resources/cursos.json')
 let cursos = JSON.parse(rawdata)
 
 async function run() {
