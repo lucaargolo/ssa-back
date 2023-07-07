@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "leite": "^0.2.0",
-    "mongodb": "^5.3.0"
+    "mongodb": "^5.3.0",
+    "readline-sync": "^1.4.10"
   }
 }

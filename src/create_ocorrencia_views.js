@@ -18,7 +18,7 @@ async function run() {
                         },
                         distanceField: "distancia",
                         spherical: true,
-                        maxDistance: 250
+                        maxDistance: 1000
                     }
                 },
                 {
@@ -42,7 +42,7 @@ async function run() {
                         },
                         distanceField: "distancia",
                         spherical: true,
-                        maxDistance: 100
+                        maxDistance: 250
                     }
                 },
                 {
@@ -66,7 +66,7 @@ async function run() {
                         },
                         distanceField: "distancia",
                         spherical: true,
-                        maxDistance: 100
+                        maxDistance: 250
                     }
                 },
                 {

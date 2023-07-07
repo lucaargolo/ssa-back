@@ -20,7 +20,7 @@ async function run() {
         let startDate = new Date('2022-01-01');
         let endDate = new Date('2023-05-31');
 
-        for(let i = 0; i < 2000000; i++) {
+        for(let i = 0; i < 10000; i++) {
             let user = await users.aggregate([
                 { "$sample": {"size": 1} }
             ]).next()

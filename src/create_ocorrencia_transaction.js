@@ -49,7 +49,9 @@ async function createOcorrencia(db, session, user_id) {
         lista_de_amigos: user.amigos_ids,
     };
 
-    return await ocorrencias.insertOne(ocorrencia, { session })
+    let insert = await ocorrencias.insertOne(ocorrencia, { session })
+    //throw "Erro"
+    return insert
 }
 
 async function run() {
