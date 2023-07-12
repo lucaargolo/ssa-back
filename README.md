@@ -55,7 +55,7 @@ Siga as etapas a seguir para instalar o MongoDB:
 **4. Conectando ao MongoDB através do Compass:**
 
 - Abra o MongoDB Compass.
-- Na janela de nova conexão que aparece, verifique que o ip e porta estão corretos, e em seguida clique em conectar.
+- Na janela de nova conexão que aparece, verifique se o ip e porta estão corretos, e em seguida clique em conectar.
 
 ![img.png](resources/connect.png)
 
@@ -82,23 +82,23 @@ Siga as etapas a seguir para instalar o MongoDB:
 
 ![img_3.png](resources/collection_oc.png)
 
-**6. Indice Geoespacial**
+**6. Índice Geoespacial**
 
-Para realizar operações de busca em pontos de localização das ocorrencias, um indice geoespacial deve ser obrigatoriamente criado.
+Para realizar operações de busca em pontos de localização das ocorrências, um índice geoespacial deve ser obrigatoriamente criado.
 
-- Abra a janela da coleção de ocorrências, navegue para a aba de indices e clique em Create Index.
-![img.png](resources/index.png)
-- Configure o campo do indice para `localizacao` e o tipo do indice para `2dsphere`. Por fim clique em criar indice.
-![img_1.png](resources/index_2d.png)
+- Abra a janela da coleção de ocorrências, navegue para a aba de índices e clique em Create Index.
+  ![img.png](resources/index.png)
+- Configure o campo do índice para `localizacao` e o tipo do índice para `2dsphere`. Por fim clique em criar índice.
+  ![img_1.png](resources/index_2d.png)
 
-Pronto, o banco está configurado e já deverá ser possível executar os codigos.
+Pronto, o banco está configurado e já deverá ser possível executar os códigos.
 
 
 ## 1. Modelagem e Mapeamento
 
 ### Estrutura da nossas coleções:
 
- - Coleção de Usuários
+- Coleção de Usuários
 
 ```json
 {
@@ -154,8 +154,8 @@ Pronto, o banco está configurado e já deverá ser possível executar os codigo
 ### Populando as coleções:
 
 1. Para popular a coleção de usuários, execute o `populate_users.js`. Ele irá preencher a coleção de usuários com 1000 usuários gerados aleatoriamente.
-    <br><br>
-    Exemplo de usuário gerado:
+   <br><br>
+   Exemplo de usuário gerado:
     ```json
     {
       "_id": { "$oid": "64a76e07c7eafbb4bad8bdb9" },
@@ -175,7 +175,7 @@ Pronto, o banco está configurado e já deverá ser possível executar os codigo
     ```
    Observação: Os usuários gerados não possuem imagem de perfil, nem localização.
    <br><br>
-2. Para popular a coleção de usuários, execute o `populate_ocorrencias.js`. Ele irá preencher a coleção de ocorrencias com 10000 ocorrências geradas aleatoriamente.
+2. Para popular a coleção de usuários, execute o `populate_ocorrencias.js`. Ele irá preencher a coleção de ocorrências com 10000 ocorrências geradas aleatoriamente.
    <br><br>
    Exemplo de ocorrência gerada:
     ```json
@@ -214,33 +214,33 @@ Para criar as nossas visões, parametrizadas para os principais campus da UFBA e
 
 Ao executar essa operação, 3 views devem ser criadas:
 
-- ocorrenciasCanela 
-- ocorrenciasOndina
-- ocorrenciasSaoLazaro
+- `ocorrenciasCanela `
+- `ocorrenciasOndina`
+- `ocorrenciasSaoLazaro`
 
 ![img_2.png](resources/views.png)
 
-Para consultar ocorrencias nas views criadas, execute o `consult_ocorrencia_views.js` 
+Para consultar ocorrências nas views criadas, execute o `consult_ocorrencia_views.js`
 
-### Criando nossos indices:
+### Criando nossos índices:
 
 Para criar os nossos índices, utilize o MongoDBCompass e repetindo o processo de criação já ensinado, iremos criar mais dois índices na coleção de ocorrências:
 
-1. Crie um índice no campo de data_hora do tipo -1 (descendente)
+1. Crie um índice no campo de `data_hora` do tipo `-1` (descendente)
 
 ![img_2.png](resources/index_dh.png)
 
-2. Crie um índice composto nos campos localizacao e data_hora
+2. Crie um índice composto nos campos `localizacao` e `data_hora`
 
 ![img_3.png](resources/index_cp.png)
 
 ## 3. Otimização
 
-Para testar o impacto dos nossos indices em consultas, utilizaremos novamente o MongoDBCompass, para fazer um explain visual das operações de busca.
+Para testar o impacto dos nossos índices em consultas, utilizaremos novamente o MongoDBCompass, para fazer um explain visual das operações de busca.
 
 ![img_4.png](resources/explain.png)
 
-Para testar o antes e depois do índice no campo de data_hora utilize a seguinte query: 
+Para testar o antes e depois do índice no campo de data_hora utilize a seguinte query:
 
 ```js
 {data_hora: {$lt: ISODate("2022-03-29T19:08:17.386+00:00")}}
@@ -256,7 +256,7 @@ Para testar o antes e depois do índice no campo de data_hora utilize a seguinte
 
 ![img_6.png](resources/after_dh.png)
 
-Para testar o antes e depois do índice composto nos campos localizacao e data_hora utilize a seguinte query:
+Para testar o antes e depois do índice composto nos campos `localizacao` e `data_hora` utilize a seguinte query:
 
 ```js
 {
@@ -280,7 +280,7 @@ Para testar o antes e depois do índice composto nos campos localizacao e data_h
 
 **Observação:**
 
-Caso seja necessário deletar um índice para a execução do teste, isso pode ser feito na página de criação de indices.
+Caso seja necessário deletar um índice para a execução do teste, isso pode ser feito na página de criação de índices.
 
 ![img_12.png](resources/remove_idx.png)
 
@@ -288,18 +288,18 @@ Após clicar para remover o índice e confirmar sua remoção, o teste pode ser 
 
 **Importante:**
 
-Quando o índice composto for criado, é possível que o MongoDB demore algum tempo até decidir começar a usa-lo (Pode ser minutos ou até horas). Para motivos de testes recomendamos que delete o índice 2dsphere no campo localizacao para forçar o Mongo a usar o índice composto.
+Quando o índice composto for criado, é possível que o MongoDB demore algum tempo até decidir começar a usá-lo (Pode ser minutos ou até horas). Para motivos de testes, recomendamos que delete o índice `localizacao_2dsphere` no campo `localizacao` para forçar o Mongo a usar o índice composto.
 
 
 ## 4. Stored Procedures e Triggers
 
-Como as Atlas Functions (Stored Procedures do MongoDB) são exclusivas da plataforma cloud (MongoDB Atlas), incluimos apenas um exemplo de como seria uma procedure para atualizar a localização de um usuário. 
+Como as Atlas Functions (Stored Procedures do MongoDB) são exclusivas da plataforma cloud (MongoDB Atlas), incluímos apenas um exemplo de como seria uma procedure para atualizar a localização de um usuário.
 
 Esse exemplo pode ser encontrado em `stored_procedures.js`, mas não pode ser executado.
 
 ## 5. Transações
 
-Para poder utilizar transações no mongodb, a replicação deve está ativada. Para isso, encerre a instancia do banco e reinicie ela usando o parametro `--replSet rs0`
+Para poder utilizar transações no mongodb, a replicação deve estar ativada. Para isso, encerre a instância do banco e reinicie ela usando o parâmetro `--replSet rs0`
 
 Nosso comando para iniciar o banco ficará da seguinte forma:
 
@@ -313,7 +313,7 @@ Com o Compass conectado, será preciso iniciar o set de replicação. Para isso 
 
 ![img_14.png](resources/rp_initiate.png)
 
-Para executar uma transação que cria uma ocorrência a partir de um usuário aleatorio, e tenta atualizar a localização do usuário antes de criar a ocorrência, execute o `create_ocorrencia_transaction.js`
+Para executar uma transação que cria uma ocorrência a partir de um usuário aleatório, e tenta atualizar a localização do usuário antes de criar a ocorrência, execute o `create_ocorrencia_transaction.js`
 
 Observação: Para testar a transação em caso de falha, descomente a linha 53.
 
@@ -417,7 +417,7 @@ Exemplo: `mongodb://luca:123456@127.0.0.1:27017`
 
 As ferramentas de auditoria e segurança se encontram apenas disponíveis na versão enterprise do MongoDB, logo não conseguimos testar as mesmas.
 
-Caso fosse possível ter acesso a versão enterprise, poderiamos ativar a auditoria utilizando os seguintes parametros:
+Caso fosse possível ter acesso a versão enterprise, poderíamos ativar a auditoria utilizando os seguintes parâmetros:
 
 - `--auditDestination file` Seta o destino da auditoria para um arquivo.
 - `--auditFormat JSON ` Configura o tipo de arquivo para JSON.
@@ -474,7 +474,7 @@ Com as ferramentas já instaladas.
 
 Para demonstração, fizemos a restauração para um banco auxiliar que chamamos de `ssa_res`.
 
-Utilizamos o seguinte comando: 
+Utilizamos o seguinte comando:
 
 `./mongorestore.exe --uri "mongodb://localhost:27017" --gzip "C:\Users\Luca\Documents\mongo-backup\ssa" -d ssa_res`
 
@@ -485,4 +485,3 @@ Utilizamos o seguinte comando:
 ![img_21.png](resources/ssa_pre_res.png)
 
 ![img_22.png](resources/ssa_aft_res.png)
-
