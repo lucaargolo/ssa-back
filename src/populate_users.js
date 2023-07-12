@@ -9,7 +9,7 @@ const leite = require("leite")
 let pessoa = leite().pessoa
 
 const fs = require('fs')
-let rawdata = fs.readFileSync('./resources/cursos.json')
+let rawdata = fs.readFileSync('cursos.json')
 let cursos = JSON.parse(rawdata)
 
 async function run() {
